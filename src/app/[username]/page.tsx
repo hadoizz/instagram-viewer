@@ -1,7 +1,7 @@
-import Highlights from "@/components/Highlights";
+ import Highlights from "@/components/Highlights";
 import {
   StoriesPlaceholder,
-  UserInfoPlaceholder,
+  UserInfoPlaceholder
 } from "@/components/Placeholders";
 import Stories from "@/components/Stories";
 import Title from "@/components/Title";
@@ -26,15 +26,6 @@ export default async function UserPage(props: Props) {
   const { username } = props.params;
   const { userId, highlight } = props.searchParams;
 
-  const handleDownload = (url: string) => {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "media"; // Set a name for the downloaded file
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <main className="flex flex-col gap-4 min-h-dvh py-8 px-4">
       <div className="flex gap-4 items-center">
@@ -56,13 +47,6 @@ export default async function UserPage(props: Props) {
         <TabsContent value="stories">
           <Suspense fallback={<StoriesPlaceholder />}>
             <Stories username={username} />
-            {/* Example download button */}
-            <button
-              onClick={() => handleDownload("media-url-here")}
-              className="mt-4 px-4 py-2 bg-purple-600 text-white rounded"
-            >
-              Download Story
-            </button>
           </Suspense>
         </TabsContent>
         <TabsContent value="highlights">
@@ -72,13 +56,6 @@ export default async function UserPage(props: Props) {
               userId={userId}
               highlight={highlight}
             />
-            {/* Example download button */}
-            <button
-              onClick={() => handleDownload("media-url-here")}
-              className="mt-4 px-4 py-2 bg-purple-600 text-white rounded"
-            >
-              Download Highlight
-            </button>
           </Suspense>
         </TabsContent>
       </Tabs>
